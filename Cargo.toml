@@ -1,0 +1,63 @@
+[package]
+name = "application"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+license = "MIT"
+repository = "https://github.com/shaorongqiang/rust-cli-template"
+readme = "README.md"
+
+[[bin]]
+name = "rust-web-template"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1.53", features = ["macros", "rt-multi-thread", "signal", "fs"] }
+tokio-util = "0.7.19"
+
+anyhow = "1.0"
+
+clap = { version = "4.6", features = ["derive", "env"] }
+clap_complete = "4.6"
+
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"
+tracing-error = "0.2"
+tracing = "0.1"
+
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+axum = { version = "0.8", features = ["ws", "macros"] }
+axum-anyhow = "0.11"
+validator = { version = "0.20", features = ["derive"] }
+axum-valid = "0.24"
+
+utoipa = { version = "5.4", features = ["axum_extras", "debug", "uuid"] }
+utoipa-axum = { version = "0.2", features = ["debug"] }
+utoipa-swagger-ui = { version = "9.0", features = ["axum"] }
+
+jwt-simple = { version = "0.13", default-features = false, features = ["pure-rust"] }
+url = { version = "2.5", features = ["serde"] }
+
+argon2 = "0.5.3"
+rand_core = { version = "0.6", features = ["getrandom"] }
+rand = "0.9"
+
+uuid = { version = "1.17", features = ["v4", "serde"] }
+chrono = { version = "0.4.41", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+tempfile = "3.27"
+toml = "0.9"
+
+[lints.rust]
+warnings = "deny"
+#unused_crate_dependencies = "deny"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
